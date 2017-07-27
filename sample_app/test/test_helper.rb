@@ -5,4 +5,9 @@ ENV['RAILS_ENV'] ||= 'test'
   Minitest::Reporters.use!
 class ActiveSupport::TestCase
 	fixtures :all
+
+	# 如果用户已登录，返回 true 
+	def is_logged_in?
+		!session[:user_id].nil? 
+	end
 end
