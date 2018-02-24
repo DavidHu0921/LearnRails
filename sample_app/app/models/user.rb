@@ -64,7 +64,12 @@ class User < ApplicationRecord
 		UserMailer.password_reset(self).deliver_now 
 	end
 
-
+	# 实现动态流原型
+	# 完整的实现参见第 14 章 
+	def feed
+		Micropost.where("user_id = ?", id) 
+	end
+	
 	# 如果密码重设请求超时了，返回 true 
 	def password_reset_expired?
 		reset_sent_at < 2.hours.ago 
