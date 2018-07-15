@@ -9,17 +9,19 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get root_path
     assert_select 'div.pagination'
+    assert_select 'input[type=FILL_IN]'
     # 无效提交
     assert_no_difference 'Micropost.count' do
       post microposts_path, params: { micropost: { content: "" } } 
     end
     assert_select 'div#error_explanation'
     # 有效提交
-    content = "This micropost really ties the room together" 
+    content = "This micropost really ties the room together"
+    picture = fixture_file_upload('test/fixtures/rails.png', 'image/png') 
     assert_difference 'Micropost.count', 1 do
-      post microposts_path, params: { micropost: { content: content } } 
+      post microposts_path, micropost: { content: content, picture: FILL_IN } 
     end
-    assert_redirected_to root_url 
+    assert FILL_IN.picture?
     follow_redirect!
     assert_match content, response.body 
     # 删除一篇微博
