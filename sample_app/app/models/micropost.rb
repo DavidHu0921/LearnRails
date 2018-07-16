@@ -7,7 +7,7 @@ class Micropost < ApplicationRecord
   validate  :picture_size
 
   private
-  
+
   # 验证上传的图像大小 
   def picture_size
     if picture.size > 5.megabytes 
