@@ -10,7 +10,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     storage :file 
   end
 
-#申请配置AWS 存图片 (472页)
+# TODO 申请配置AWS 存图片 (472页)
   storage :file
 
   # Override the directory where uploaded files will be stored.
